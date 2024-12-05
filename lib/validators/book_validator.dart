@@ -33,5 +33,7 @@ class BookValidator {
     if(controller == null){
       return "Este campo é obrigatório";
     }
+
+    return null;
   }
 }
