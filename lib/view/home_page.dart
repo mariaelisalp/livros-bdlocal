@@ -52,13 +52,27 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.teal.shade300,
         focusColor: Colors.white,
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(10.0),
-        itemCount: books.length,
-        itemBuilder: (context, index) {
-          return bookCard(context, index);
-        },
-      ),
+      body: books.isEmpty 
+        ? const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Seus livros aparecerão aqui.",
+                  style: TextStyle(color: Colors.grey, fontSize: 20.0),
+                ),
+                SizedBox(height: 5.0),
+                Icon(Icons.book, color: Colors.grey, size: 50.0,),
+              ],
+            ),
+          )
+        : ListView.builder(
+            padding: const EdgeInsets.all(10.0),
+            itemCount: books.length,
+            itemBuilder: (context, index) {
+              return bookCard(context, index);
+            },
+          ),
     );
   }
 
