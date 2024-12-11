@@ -39,7 +39,6 @@ class _BookPageState extends State<BookPage> {
   final _titleFocus = FocusNode();
   final _authorFocus = FocusNode();
   final _yearFocus = FocusNode();
-  final _genreFocus = FocusNode();
   final _publisherFocus = FocusNode();
   String? _titleError;
   String? _errorYear;
@@ -99,7 +98,7 @@ class _BookPageState extends State<BookPage> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             _validateFields();
-            if (_titleError == null && _errorYear == null) {
+            if (_titleError == null && _errorYear == null && _authorError == null && _genreError == null && _publisherError == null) {
               Navigator.pop(context, _editedBook);
               print(_editedBook.toMap());
             } else {
@@ -162,7 +161,7 @@ class _BookPageState extends State<BookPage> {
                   setState(() {
                     _editedBook.title = text;
                   });
-                  _validateFields();
+                  _titleError = validator.validateField(_titleController);
                 },
               ),
               if (_titleError != null)
@@ -180,7 +179,7 @@ class _BookPageState extends State<BookPage> {
                   setState(() {
                     _editedBook.author = text;
                   });
-                  _validateFields();
+                  _authorError = validator.validateField(_authorController);
                 },
               ),
               if (_authorError != null)
@@ -198,7 +197,7 @@ class _BookPageState extends State<BookPage> {
                   setState(() {
                     _editedBook.year = text;
                   });
-                  _validateFields();
+                  _errorYear = validator.validateYear(_yearController, now);
                 },
               ),
               if (_errorYear != null)
@@ -215,7 +214,7 @@ class _BookPageState extends State<BookPage> {
                     _genreController = option;
                     _editedBook.genre = option;
                   });
-                  _validateFields();
+                  _genreError = validator.validateSelect(_genreController);
                 },
               ),
               if(_genreError != null)
@@ -233,7 +232,7 @@ class _BookPageState extends State<BookPage> {
                   setState(() {
                     _editedBook.publisher = text;
                   });
-                  _validateFields();
+                  _publisherError = validator.validateField(_publisherController);
                 },
               ),
               if(_publisherError != null)

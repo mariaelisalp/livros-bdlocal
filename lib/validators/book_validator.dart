@@ -29,7 +29,7 @@ class BookValidator {
   }
 
   String? validateSelect(String? controller){
-    
+
     if(controller == null){
       return "Este campo é obrigatório";
     }
